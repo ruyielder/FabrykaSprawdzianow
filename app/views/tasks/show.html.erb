@@ -10,5 +10,14 @@
   <%= @task.answer %>
 </p>
 
+<p>
+  <strong>Tags:</strong>
+  <ul>
+  <% @task.user_tags.each do |user_tag| %>
+    <li><%= user_tag.tag %></li>
+  <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
