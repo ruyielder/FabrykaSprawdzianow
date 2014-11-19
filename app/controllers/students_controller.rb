@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
@@ -42,6 +43,7 @@ class StudentsController < ApplicationController
     end
 
     def student_params
-      params.require(:student).permit(:name, :teacher_id)
+      default_params = {teacher_id: current_user.id}
+      params.require(:student).permit(:name).merge default_params
     end
 end
