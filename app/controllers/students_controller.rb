@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   respond_to :html
 
   def index
-    @students = Student.all
+    @students = Student.where(teacher_id: current_user.id)
     respond_with(@students)
   end
 
@@ -39,7 +39,7 @@ class StudentsController < ApplicationController
 
   private
     def set_student
-      @student = Student.find(params[:id])
+      @student = Student.where(id: params[:id], teacher_id: current_user.id).first!
     end
 
     def student_params
