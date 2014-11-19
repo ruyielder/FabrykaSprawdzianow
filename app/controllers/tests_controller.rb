@@ -5,7 +5,7 @@ class TestsController < ApplicationController
   respond_to :html
 
   def index
-    @tests = Test.all
+    @tests = Test.where(author_id: current_user.id)
     respond_with(@tests)
   end
 
@@ -43,6 +43,7 @@ class TestsController < ApplicationController
     end
 
     def test_params
-      params.require(:test).permit(:student_id)
+      default_params = {author_id: current_user.id}
+      params.require(:test).permit(:student_id).merge default_params
     end
 end
