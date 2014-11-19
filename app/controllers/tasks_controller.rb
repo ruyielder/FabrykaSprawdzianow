@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   respond_to :html
 
   def index
-    @tasks = Task.all
+    @tasks = Task.where(author_id: current_user.id)
     respond_with(@tasks)
   end
 
@@ -39,10 +39,11 @@ class TasksController < ApplicationController
 
   private
     def set_task
-      @task = Task.find(params[:id])
+      @task = Task.where(id: params[:id], author_id: current_user.id).first!
     end
 
     def task_params
-      params.require(:task).permit(:question, :answer)
+      default_params = {author_id: current_user.id}
+      params.require(:task).permit(:question, :answer).merge default_params
     end
 end
