@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :tests
 
+  get 'tasks/by_tags' #=> 'tasks#by_tags'
   resources :tasks
 
   resources :students

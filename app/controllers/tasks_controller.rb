@@ -3,6 +3,8 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
 
   respond_to :html
+  respond_to :json, only: :by_tags
+
 
   def index
     @tasks = Task.where(author_id: current_user.id)
@@ -37,6 +39,19 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_with(@task)
+  end
+
+  def by_tags
+    tag_ids = params[:tags]
+
+    if tag_ids
+      ids = tag_ids.split(',').map(&:strip).map(&:to_i)
+      @tasks = Task.joins(:user_tags).where('user_tags.id' => ids, author_id: current_user.id)
+    else
+      @tasks = []
+    end
+
+    respond_with(@tasks)
   end
 
   private
