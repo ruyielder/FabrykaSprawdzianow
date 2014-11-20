@@ -15,6 +15,7 @@ class TestsController < ApplicationController
 
   def new
     @test = Test.new
+    @tags = UserTag.where(user_id: current_user.id)
     respond_with(@test)
   end
 
