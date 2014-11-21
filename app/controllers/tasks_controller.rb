@@ -43,8 +43,24 @@ class TasksController < ApplicationController
 
   def by_tags
     tag_ids = params[:tags]
+    unique_for = params[:unique_for]
 
-    if tag_ids
+    if unique_for and digits?(unique_for)
+      student_id = unique_for.to_i
+    else
+      student_id = nil
+    end
+
+
+    if tag_ids and student_id
+      # suuuuuper slow :(
+      ids = tag_ids.split(',').map(&:strip).map(&:to_i)
+      puts 'IDS', ids.inspect
+      tasks = Task.joins(:user_tags).where('user_tags.id' => ids, author_id: current_user.id)
+      ignored_student_tasks = StudentsTasks.where({student_id: student_id}).where({task_id: tasks})
+      ignored_task_ids = Set.new ignored_student_tasks.map &:task_id
+      @tasks = tasks.select {|task| not ignored_task_ids.include? task.id}
+    elsif tag_ids
       ids = tag_ids.split(',').map(&:strip).map(&:to_i)
       @tasks = Task.joins(:user_tags).where('user_tags.id' => ids, author_id: current_user.id)
     else
@@ -91,5 +107,10 @@ class TasksController < ApplicationController
       user_tag.tag = text
       user_tag.save
       user_tag
+    end
+
+    def digits?(text)
+      normalized = text.strip
+      normalized.size == normalized.to_i.to_s.size
     end
 end
