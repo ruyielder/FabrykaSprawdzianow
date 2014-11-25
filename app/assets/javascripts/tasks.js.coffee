@@ -1,8 +1,12 @@
 jQuery ->
+  if $('.tasks.new').length == 1 or $('.tasks.edit').length == 1
+    runInputFields()
+
+
+runInputFields = () ->
   key_a = 65
   key_e = 69
   key_o = 79
-
 
   getNorwayLetter = (keyCode, shiftKey) ->
     if shiftKey
@@ -19,7 +23,6 @@ jQuery ->
         return 'æ'
       else if keyCode == key_o
         return 'ø'
-
 
   $(document).keydown (e) ->
       node = $(e.target)
