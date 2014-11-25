@@ -59,7 +59,7 @@ class TasksController < ApplicationController
       puts 'IDS', ids.inspect
       tasks = Task.joins(:user_tags).where('user_tags.id' => ids, author_id: current_user.id).
           limit(task_limit).distinct
-      ignored_student_tasks = StudentsTasks.where({student_id: student_id}).where({task_id: tasks})
+      ignored_student_tasks = StudentTask.where({student_id: student_id}).where({task_id: tasks})
       ignored_task_ids = Set.new ignored_student_tasks.map &:task_id
       @tasks = tasks.select {|task| not ignored_task_ids.include? task.id}
     elsif tag_ids

@@ -5,5 +5,14 @@
   <%= @test.student.name %>
 </p>
 
+<p>
+  <strong>Zadania</strong>
+  <ul>
+  <% @test.each_task do |task| %>
+    <li><%= task.question %></li>
+  <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_test_path(@test) %> |
 <%= link_to 'Back', tests_path %>
