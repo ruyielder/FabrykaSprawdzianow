@@ -1,3 +1,23 @@
 // Place all the styles related to the tests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+p.tag {
+  color: rgb(0, 0, 0);
+//  font-size: 30px;
+}
+
+p.used {
+  color: rgb(0, 127, 0)
+}
+
+li.task {
+  color: rgb(0, 0, 0)
+}
+
+li.task.searched.used {
+  color: rgb(128, 128, 128)
+}
+
+li.task.selected.used {
+  color: rgb(0, 0, 200)
+}

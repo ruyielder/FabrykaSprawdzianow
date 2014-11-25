@@ -16,8 +16,28 @@
     <%= f.select :student_id , options_for_select(Student.all.map{|s|[s.name, s.id]}) %>
   </div>
 
-    <%= render 'tags' %>
+    <input type="hidden" id="test_tasks" name="test[tasks]" />
 
+    <h3>Tagi</h3>
+    <div>
+      <% @tags.each do |tag| %>
+          <p class="tag" data-id="<%= tag.id %>"><%= tag.tag %></p>
+      <% end %>
+    </div>
+
+    <h3>Wyszukane zadania</h3>
+
+    <label for="is_unique_tasks">Tylko unikalne?</label><br>
+    <input type="checkbox" id="is_unique_tasks" checked="true" />
+
+    <ul id="searched_tasks">
+
+    </ul>
+
+    <h3>Wybrane zadania</h3>
+    <ul id="selected_tasks">
+
+    </ul>
   <div class="actions">
     <%= f.submit %>
   </div>
