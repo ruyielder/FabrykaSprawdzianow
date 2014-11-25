@@ -42,3 +42,6 @@ gem 'devise'
 
 gem 'wkhtmltopdf'
 gem 'wicked_pdf'
+
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
