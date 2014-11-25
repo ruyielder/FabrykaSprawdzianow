@@ -2,7 +2,7 @@ class TestsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_test, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :pdf
 
   def index
     @tests = Test.where(author_id: current_user.id)
@@ -10,7 +10,11 @@ class TestsController < ApplicationController
   end
 
   def show
-    respond_with(@test)
+    respond_with(@test) do |format|
+      format.pdf do
+        render :pdf => "file_name", :template => 'tests/show.pdf.erb'
+      end
+    end
   end
 
   def new
