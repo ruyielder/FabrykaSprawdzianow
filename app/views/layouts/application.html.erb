@@ -13,23 +13,6 @@
   <![endif]-->
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
-
-<div class="container">
-  <div class="header">
-    <nav>
-      <ul class="nav nav-pills pull-right">
-        <li role="presentation"><a href="<%= new_user_session_path %>">Zaloguj się</a></li>
-      </ul>
-    </nav>
-    <h3 class="text-muted">Test Factory</h3>
-  </div>
-
   <%= yield %>
-
-  <footer class="footer">
-    <p>&copy; RuYielder 2014</p>
-  </footer>
-</div>
-
 </body>
 </html>
