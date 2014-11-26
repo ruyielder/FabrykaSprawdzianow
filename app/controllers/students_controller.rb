@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
 
   def update
     @student.update(student_params)
-    respond_with(@student)
+    redirect_to students_path
   end
 
   def destroy
