@@ -6,7 +6,6 @@ class TestsController < ApplicationController
 
   def index
     @tests = Test.where(author_id: current_user.id).order(created_at: :desc)
-    # logger.debug(@tasks)
     if @tests.empty?
       redirect_to new_test_url
     else
@@ -23,9 +22,18 @@ class TestsController < ApplicationController
   end
 
   def new
-    @test = Test.new
-    @tags = UserTag.where(user_id: current_user.id)
-    respond_with(@test)
+    student = Student.where(teacher_id: current_user.id).first
+    task = Task.where(author_id: current_user.id).first
+
+    if student.nil?
+      redirect_to new_student_url
+    elsif task.nil?
+      redirect_to new_task_url
+    else
+      @test = Test.new
+      @tags = UserTag.where(user_id: current_user.id)
+      respond_with(@test)
+    end
   end
 
   def edit
