@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   respond_to :html
 
   def index
-    @students = Student.where(teacher_id: current_user.id)
+    @students = Student.where(teacher_id: current_user.id).order(created_at: :desc)
     respond_with(@students)
   end
 
