@@ -9,37 +9,42 @@
   </div>
 
   <div class="container">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin", role: "form"} ) do |f| %>
-      <h2>Logowanie</h2>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
 
-      <div class="form-group">
-        <%= f.label :email, class: 'sr-only' %><br />
-        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin", role: "form"} ) do |f| %>
+
+          <h2>Logowanie</h2>
+            <br />
+
+          <div class="form-group">
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Hasło' %>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :remember_me %>Loguj przy każdej wizycie
+            </label>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Zaloguj się", class: 'btn btn-lg btn-primary btn-block' %>
+          </div>
+
+          <br />
+
+          <%= link_to "Zapomniałeś hasło?", new_password_path(resource_name) %><br />
+
+      <% end %>
+        <div class="col-md-3"></div>
       </div>
-
-      <div class="form-group">
-        <%= f.label :password, class: 'sr-only' %><br />
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
       </div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="checkbox">
-          <label>
-            <%= f.check_box :remember_me %>Loguj przy każdej wizycie
-          </label>
-        </div>
-      <% end -%>
-
-      <div class="actions">
-        <%= f.submit "Zaloguj się", class: 'btn btn-lg btn-primary btn-block' %>
-      </div>
-
-      <br />
-
-      <%= link_to "Zapomniałeś hasło?", new_password_path(resource_name) %><br />
-
-  <% end %>
-  </div>
+    </div>
 
   <footer class="footer">
     <p>&copy; RuYielder 2014</p>
