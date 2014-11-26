@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   resources :tests
 
   get 'tasks/by_tags' #=> 'tasks#by_tags'
@@ -6,7 +8,9 @@ Rails.application.routes.draw do
 
   resources :students
 
-  devise_for :users
+
+  get 'main/index'
+  root 'main#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
