@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'tasks/by_tags' #=> 'tasks#by_tags'
   resources :tasks
 
-  resources :students
+  resources :students, :except => :show
 
 
   get 'main/index'

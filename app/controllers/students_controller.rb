@@ -1,16 +1,12 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: [:edit, :update, :destroy]
 
   respond_to :html
 
   def index
     @students = Student.where(teacher_id: current_user.id).order(created_at: :desc)
     respond_with(@students)
-  end
-
-  def show
-    respond_with(@student)
   end
 
   def new
