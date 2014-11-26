@@ -6,7 +6,12 @@ class TestsController < ApplicationController
 
   def index
     @tests = Test.where(author_id: current_user.id).order(created_at: :desc)
-    respond_with(@tests)
+    # logger.debug(@tasks)
+    if @tests.empty?
+      redirect_to new_test_url
+    else
+      respond_with(@tests)
+    end
   end
 
   def show
