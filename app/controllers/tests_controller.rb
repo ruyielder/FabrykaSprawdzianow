@@ -5,7 +5,7 @@ class TestsController < ApplicationController
   respond_to :html, :pdf
 
   def index
-    @tests = Test.where(author_id: current_user.id)
+    @tests = Test.where(author_id: current_user.id).order(created_at: :desc)
     respond_with(@tests)
   end
 
