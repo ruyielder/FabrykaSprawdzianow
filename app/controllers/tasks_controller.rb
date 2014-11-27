@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   respond_to :html
   respond_to :json, only: :by_tags
 
-
   def index
     @tasks = Task.where(author_id: current_user.id)
     respond_with(@tasks)
@@ -80,11 +79,11 @@ class TasksController < ApplicationController
 
     def task_params
       default_params = {author_id: current_user.id}
-      params.require(:task).permit(:question, :answer).merge default_params
+      params.require(:task).permit(:question, :answer, :tags_line).merge default_params
     end
 
     def update_tags
-      line = params[:task][:tags_line]
+      line = @task.tags_line
       tag_names = get_tag_names(line)
       tags = @task.user_tags
       mapping_tags = {}

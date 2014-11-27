@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125092752) do
+ActiveRecord::Schema.define(version: 20141127201233) do
 
   create_table "student_tasks", force: true do |t|
     t.integer  "task_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20141125092752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id"
+    t.string   "tags_line"
   end
 
   create_table "tasks_user_tags", force: true do |t|
