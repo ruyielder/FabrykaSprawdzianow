@@ -15,7 +15,6 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
       <%= form_for(@student, html: {role: "form"}) do |f| %>
-          <h3>Dodaj studenta</h3>
           <% if @student.errors.any? %>
               <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
