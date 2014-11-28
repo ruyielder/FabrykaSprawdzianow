@@ -1,7 +1,6 @@
-jQuery ->
+$(document).on 'page:change', ->
   if $('.tests.new').length == 1 or $('.tests.edit').length == 1
     runForm()
-
 
 runForm = () ->
   activationTagColor = 'rgb(0, 128, 0)'
@@ -32,9 +31,10 @@ runForm = () ->
 
   registerTagElements = () ->
     $('.tag').click () ->
-      $(@).toggleClass('btn-info')
-      $(@).toggleClass('btn-success')
-      $(@).toggleClass('used')
+      element = $(@)
+      element.toggleClass('btn-info')
+      element.toggleClass('btn-success')
+      element.toggleClass('used')
       searchByUsedTags()
 
   toIds = (elements) ->
@@ -50,6 +50,8 @@ runForm = () ->
     if tagIds.length > 0
       url = buildSearchUrl(tagIds, studentElement.val())
       $.get(url, replaceSearchedTasks)
+    else
+      $('.task.searched').remove()
 
   replaceSearchedTasks = (tasks) ->
     $('.task.searched').remove()
@@ -71,10 +73,7 @@ runForm = () ->
     buildTaskElement(task, 'selected')
 
   buildTaskElement = (task, kind) ->
-    console.log('BUILD TASK _ELEMENT')
-    element = $("<li class='task #{kind} list-group-item' id='#{kind}_task_#{task.id}' data-id='#{task.id}'>#{task.question}</li>")
-    console.log(element)
-    return element
+    $("<li class='task #{kind} list-group-item' id='#{kind}_task_#{task.id}' data-id='#{task.id}'>#{task.question}</li>")
 
   registerAllSearchedTask = () ->
     $('li.task.searched').click () ->
@@ -136,3 +135,7 @@ runForm = () ->
   registerStudentElement()
   registerUniqueTasksElement()
   registerTagElements()
+
+
+#$(document).ready(ready);
+#$(document).on('page:load', ready);

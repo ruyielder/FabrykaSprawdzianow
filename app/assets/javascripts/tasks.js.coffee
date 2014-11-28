@@ -1,4 +1,4 @@
-jQuery ->
+$(document).on 'page:change', ->
   if $('.tasks.new').length == 1 or $('.tasks.edit').length == 1
     runInputFields()
 
