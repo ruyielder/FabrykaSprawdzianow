@@ -26,13 +26,13 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.save
     update_tags
-    respond_with(@task)
+    redirect_to tasks_path
   end
 
   def update
     @task.update(task_params)
     update_tags
-    respond_with(@task)
+    redirect_to tasks_path
   end
 
   def destroy
