@@ -95,20 +95,12 @@ class TasksController < ApplicationController
       end
       new_tag_names = tag_names - used_tag_names
       new_tag_names.each do |tag_name|
-        @task.user_tags << make_tag(tag_name)
+        @task.user_tags << UserTag.where(user_id: current_user.id, tag: tag_name).first_or_create
       end
     end
 
     def get_tag_names(tags_line)
       Set.new (tags_line.split(',').map &:strip).select {|v| v.size > 0}
-    end
-
-    def make_tag(text)
-      user_tag = UserTag.new
-      user_tag.user = current_user
-      user_tag.tag = text
-      user_tag.save
-      user_tag
     end
 
     def digits?(text)
