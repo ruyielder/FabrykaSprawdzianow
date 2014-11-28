@@ -16,7 +16,7 @@ class TestsController < ApplicationController
   def show
     respond_with(@test) do |format|
       format.pdf do
-        render :pdf => "file_name", :template => 'tests/show.pdf.erb'
+        render :pdf => @test.filename, :template => 'tests/show.pdf.erb'
       end
     end
   end
