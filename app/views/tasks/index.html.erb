@@ -22,7 +22,7 @@
             <tbody>
             <% tasks_user_tags.each do |task_user_tag|%>
                 <tr>
-                  <td><%= task_user_tag.task.question %></td>
+                  <td><strong><%= task_user_tag.task.question %></strong></td>
                   <td><%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span> Podgląd'), task_user_tag.task %></td>
                   <td><%= link_to raw('<span class="glyphicon glyphicon-wrench"></span> Edytuj'), edit_task_path(task_user_tag.task) %></td>
                   <td><%= link_to 'Usuń', task_user_tag.task, method: :delete, class: 'label label-danger', data: { confirm: 'Jesteś pewien?' } %></td>

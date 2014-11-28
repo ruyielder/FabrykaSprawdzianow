@@ -23,7 +23,7 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><strong><%= student.name %></strong></td>
         <td><%= student.created_at.to_date %></td>
         <td><%= link_to raw('<span class="glyphicon glyphicon-wrench"></span> Edytuj'), edit_student_path(student) %></td>
         <td><%= link_to 'Usuń', student, method: :delete, class: 'label label-danger', data: { confirm: 'Jesteś pewien?' } %></td>
