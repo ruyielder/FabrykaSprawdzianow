@@ -15,7 +15,7 @@ runForm = () ->
 
   registerFormElement = () ->
     $('#new_test').submit (event) ->
-      taskIds = toIds($('li.task.selected'))
+      taskIds = toIds($('.task.selected'))
       if taskIds.length == 0
         event.preventDefault()
 
@@ -31,7 +31,7 @@ runForm = () ->
       searchByUsedTags()
 
   registerTagElements = () ->
-    $('p.tag').click () ->
+    $('.tag').click () ->
       $(@).toggleClass('used')
       searchByUsedTags()
 
@@ -44,13 +44,13 @@ runForm = () ->
     return "/tasks/by_tags.json?tags=#{tag_ids.join()}"
 
   searchByUsedTags = () ->
-    tagIds = toIds($('p.tag.used'))
+    tagIds = toIds($('.tag.used'))
     if tagIds.length > 0
       url = buildSearchUrl(tagIds, studentElement.val())
       $.get(url, replaceSearchedTasks)
 
   replaceSearchedTasks = (tasks) ->
-    $('li.task.searched').remove()
+    $('.task.searched').remove()
     addSearchedTasks(tasks)
     registerAllSearchedTask()
 
@@ -69,11 +69,13 @@ runForm = () ->
     buildTaskElement(task, 'selected')
 
   buildTaskElement = (task, kind) ->
-    $("<li class='task #{kind}' id='#{kind}_task_#{task.id}' data-id='#{task.id}'>#{task.question}</li>")
+    console.log('BUILD TASK _ELEMENT')
+    element = $("<li class='task #{kind} list-group-item' id='#{kind}_task_#{task.id}' data-id='#{task.id}'>#{task.question}</li>")
+    console.log(element)
+    return element
 
   registerAllSearchedTask = () ->
     $('li.task.searched').click () ->
-      console.log('clicked')
       element = $(@)
       if element.hasClass('used')
         dontUseSearchedTaskElement(element)
@@ -118,8 +120,8 @@ runForm = () ->
     updateSubmitFormEnable()
 
   updateSubmitFormEnable = () ->
-    if $('li.task.selected').length > 0
-      testTasksElement.val(toIds($('li.task.selected')).join())
+    if $('.task.selected').length > 0
+      testTasksElement.val(toIds($('.task.selected')).join())
       submitFormElement.removeAttr('disabled')
     else
       submitFormElement.attr('disabled','disabled')
