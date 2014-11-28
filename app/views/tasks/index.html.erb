@@ -10,27 +10,29 @@
     </nav>
     <h3 class="text-muted">Test Factory</h3>
   </div>
+    <% @tasks_user_tags.group_by {|tut| tut.user_tag.tag}.each do |tag, tasks_user_tags| %>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Zadania tagu: <span class="label label-info"><%= tag %></span></th>
+              <th>Data utworzenia</th>
+              <th colspan="3"></th>
+            </tr>
+            </thead>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Zdanie do tłumaczenia</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @tasks.each do |task| %>
-          <tr>
-            <td><%= task.question %></td>
-            <td><%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span> Podgląd'), task %></td>
-            <td><%= link_to raw('<span class="glyphicon glyphicon-wrench"></span> Edytuj'), edit_task_path(task) %></td>
-            <td><%= link_to 'Usuń', task, method: :delete, class: 'label label-danger', data: { confirm: 'Jesteś pewien?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
+            <tbody>
+            <% tasks_user_tags.each do |task_user_tag|%>
+                <tr>
+                  <td><%= task_user_tag.task.question %></td>
+                  <td><%= task_user_tag.task.created_at.to_date %></td>
+                  <td><%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span> Podgląd'), task_user_tag.task %></td>
+                  <td><%= link_to raw('<span class="glyphicon glyphicon-wrench"></span> Edytuj'), edit_task_path(task_user_tag.task) %></td>
+                  <td><%= link_to 'Usuń', task_user_tag.task, method: :delete, class: 'label label-danger', data: { confirm: 'Jesteś pewien?' } %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+    <% end %>
 <br>
 
 <%= link_to 'Dodaj zadanie', new_task_path, class: 'btn btn-primary' %>
