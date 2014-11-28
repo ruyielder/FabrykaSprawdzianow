@@ -32,6 +32,8 @@ runForm = () ->
 
   registerTagElements = () ->
     $('.tag').click () ->
+      $(@).toggleClass('btn-info')
+      $(@).toggleClass('btn-success')
       $(@).toggleClass('used')
       searchByUsedTags()
 
