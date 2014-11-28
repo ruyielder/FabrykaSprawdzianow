@@ -73,7 +73,7 @@ runForm = () ->
     buildTaskElement(task, 'selected')
 
   buildTaskElement = (task, kind) ->
-    $("<li class='task #{kind} list-group-item' id='#{kind}_task_#{task.id}' data-id='#{task.id}'>#{task.question}</li>")
+    $("<li class='task #{kind} list-group-item list-group-item-info' id='#{kind}_task_#{task.id}' data-id='#{task.id}'><strong>#{task.question}</strong></li>")
 
   registerAllSearchedTask = () ->
     $('li.task.searched').click () ->
