@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   respond_to :json, only: :by_tags
 
   def index
-    @tasks_user_tags = TasksUserTags.
+    @tasks_user_tags = TaskUserTag.
         includes(:task, :user_tag).
         where('tasks.author_id = ?', current_user.id).
         order('user_tags.tag', 'tasks.created_at')
