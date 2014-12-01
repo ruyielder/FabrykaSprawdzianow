@@ -10,4 +10,8 @@ class Test < ActiveRecord::Base
   def filename
     "#{student.name}_#{created_at.to_date}"
   end
+
+  def solution_filename
+    "#{student.name}_ODP_#{created_at.to_date}"
+  end
 end
