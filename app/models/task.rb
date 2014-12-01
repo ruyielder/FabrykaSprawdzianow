@@ -4,9 +4,9 @@ class Task < ActiveRecord::Base
 
   belongs_to :author, :class_name => 'User'
 
-  has_many :task_user_tags
+  has_many :task_user_tags, dependent: :destroy
   has_many :user_tags, through: :task_user_tags
 
-  has_many :student_tasks
+  has_many :student_tasks, dependent: :destroy
   has_many :students, through: :student_tasks
 end

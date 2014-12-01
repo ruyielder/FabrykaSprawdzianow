@@ -1,7 +1,7 @@
 class Test < ActiveRecord::Base
   belongs_to :student
 
-  has_many :student_task_tests
+  has_many :student_task_tests, dependent: :destroy
   has_many :student_tasks, through: :student_task_tests
 
   validates :title, presence: true
