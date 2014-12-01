@@ -7,7 +7,11 @@ class TasksController < ApplicationController
 
   def index
     @tasks_user_tags = TasksUserTags.includes(:task, :user_tag).order('user_tags.tag', 'tasks.created_at')
-    respond_with(@tasks_user_tags)
+    if @tasks_user_tags.empty?
+      redirect_to new_task_path
+    else
+      respond_with(@tasks_user_tags)
+    end
   end
 
   def show
