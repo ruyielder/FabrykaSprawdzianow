@@ -86,7 +86,7 @@ class TasksController < ApplicationController
 
     def task_params
       default_params = {author_id: current_user.id}
-      params.require(:task).permit(:question, :answer, :tags_line).merge default_params
+      params.require(:task).permit(:question, :answer, :extra_text, :tags_line).merge default_params
     end
 
     def update_tags

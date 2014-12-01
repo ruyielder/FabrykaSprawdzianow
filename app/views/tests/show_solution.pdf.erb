@@ -7,6 +7,11 @@
     <% @test.tasks.each_with_index do |task, index| %>
       <p><strong><%= index + 1 %>. <%= task.question %></strong></p>
       <p><%= index + 1 %>. <%= task.answer %></p>
+
+        <% if task.extra_text %>
+            <p><em><%= index + 1 %>. <%= task.extra_text %></em></p>
+        <% end %>
+
     <% end %>
 </body>
 </html>
