@@ -6,7 +6,10 @@ class TasksController < ApplicationController
   respond_to :json, only: :by_tags
 
   def index
-    @tasks_user_tags = TasksUserTags.includes(:task, :user_tag).order('user_tags.tag', 'tasks.created_at')
+    @tasks_user_tags = TasksUserTags.
+        includes(:task, :user_tag).
+        where('tasks.author_id = ?', current_user.id).
+        order('user_tags.tag', 'tasks.created_at')
     if @tasks_user_tags.empty?
       redirect_to new_task_path
     else
