@@ -1,6 +1,6 @@
 class TestsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_test, only: [:show, :edit, :update, :destroy]
+  before_action :set_test, only: [:show, :show_solution, :edit, :update, :destroy]
 
   respond_to :html, :pdf
 
@@ -17,6 +17,14 @@ class TestsController < ApplicationController
     respond_with(@test) do |format|
       format.pdf do
         render :pdf => @test.filename, :template => 'tests/show.pdf.erb'
+      end
+    end
+  end
+
+  def show_solution
+    respond_with(@test) do |format|
+      format.pdf do
+        render :pdf => @test.solution_filename, :template => 'tests/show_solution.pdf.erb'
       end
     end
   end

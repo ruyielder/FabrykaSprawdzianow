@@ -28,7 +28,8 @@
         <td><%= test.student.name %>
         <td><%= test.created_at.to_date %></td>
         <td><%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span> Podgląd'), test %></td>
-        <td><%= link_to raw('<span class="glyphicon glyphicon-download"></span> Pobierz'), test_path(test, :format => :pdf) %></span></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-download"></span> Test'), test_path(test, :format => :pdf) %></span></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-download"></span> Odpowiedzi'), show_solution_path(test, :format => :pdf) %></span></td>
         <td><%= link_to 'Usuń', test, class: 'label label-danger', method: :delete, data: { confirm: 'Jesteś pewien?' } %></td>
       </tr>
     <% end %>

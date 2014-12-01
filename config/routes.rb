@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'tests/solution/:id' => 'tests#show_solution', as: :show_solution
   resources :tests
 
   get 'tasks/by_tags' #=> 'tasks#by_tags'
