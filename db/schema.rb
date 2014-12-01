@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127201233) do
+ActiveRecord::Schema.define(version: 20141201140128) do
 
   create_table "student_tasks", force: true do |t|
     t.integer  "task_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20141127201233) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   add_index "tests", ["student_id"], name: "index_tests_on_student_id"

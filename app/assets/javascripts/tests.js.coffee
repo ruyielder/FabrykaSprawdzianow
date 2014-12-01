@@ -5,6 +5,7 @@ $(document).on 'page:change', ->
 runForm = () ->
   activationTagColor = 'rgb(0, 128, 0)'
   normalTagColor = 'rgb(0, 0, 0)'
+  titleElement = $('#test_title')
   studentElement = $('#test_student_id')
   uniqueTasksElement = $('#is_unique_tasks')
   searchedTaskContainer = $('#searched_tasks')
@@ -17,6 +18,10 @@ runForm = () ->
       taskIds = toIds($('.task.selected'))
       if taskIds.length == 0
         event.preventDefault()
+
+  registerTitleElement = () ->
+    titleElement.change () ->
+      updateSubmitFormEnable()
 
   registerSubmitFormElement = () ->
     submitFormElement.attr('disabled','disabled')
@@ -121,7 +126,8 @@ runForm = () ->
     updateSubmitFormEnable()
 
   updateSubmitFormEnable = () ->
-    if $('.task.selected').length > 0
+    console.log('odpalono procedure sprawdzania')
+    if $('.task.selected').length > 0 && titleElement.val().trim().length > 0
       testTasksElement.val(toIds($('.task.selected')).join())
       submitFormElement.removeAttr('disabled')
     else
@@ -131,6 +137,7 @@ runForm = () ->
     return $("#searched_task_#{task_id}")
 
   registerFormElement()
+  registerTitleElement()
   registerSubmitFormElement()
   registerStudentElement()
   registerUniqueTasksElement()

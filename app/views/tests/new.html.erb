@@ -29,6 +29,11 @@
     <% end %>
 
     <div class="form-group">
+      <%= f.label 'Tytuł' %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :student_id %><br>
       <%= f.select :student_id , Student.where(teacher_id: current_user.id).map{|s|[s.name, s.id]},  {}, class: 'form-control' %>
     </div>

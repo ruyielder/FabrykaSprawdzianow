@@ -46,6 +46,7 @@ class TestsController < ApplicationController
       @test.save
       update_student_tasks_for_test(@test)
     end
+    @tags = UserTag.where(user_id: current_user.id)
     respond_with(@test)
   end
 
@@ -67,7 +68,7 @@ class TestsController < ApplicationController
 
     def test_params
       default_params = {author_id: current_user.id}
-      params.require(:test).permit(:student_id).merge default_params
+      params.require(:test).permit(:student_id, :title).merge default_params
     end
 
     def update_student_tasks_for_test(test)
