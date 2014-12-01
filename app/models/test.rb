@@ -4,10 +4,10 @@ class Test < ActiveRecord::Base
   validates :title, presence: true
 
   def tasks
-    student_tasks.map &:task #{|student_task| student_task.task}
+    student_tasks.map &:task
   end
 
   def filename
-    "#{student.name}_#{created_at.to_date}.pdf"
+    "#{student.name}_#{created_at.to_date}"
   end
 end
